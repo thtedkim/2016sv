@@ -51,7 +51,7 @@
     <repository>
       <id>src.test</id>
       <name>test</name>
-      <url>http://github.com/aksjm2/2016sv</url>
+      <url>http://52.79.122.49:8888/</url>
     </repository>
  </distributionManagement>
   
