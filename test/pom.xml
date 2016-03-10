@@ -15,7 +15,7 @@
   </properties>
   
   <scm>
-  <connection>scm:git:https://aksjm2:aksjm1564@github.com/aksjm2/2016sv.git</connection>
+  <connection>scm:git:git://github.com/aksjm2/2016sv.git</connection>
   </scm>
   <build>
   <plugins>
