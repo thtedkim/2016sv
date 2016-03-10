@@ -34,7 +34,6 @@
         </archive>
       </configuration>
     </plugin>
-  
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-release-plugin</artifactId>
@@ -45,10 +44,17 @@
     </configuration>
 </plugin>	
 	</plugins>
-	
 
   </build>
 
+<distributionManagement>
+    <repository>
+      <id>internal.test</id>
+      <name>test</name>
+      <url>/</url>
+    </repository>
+ </distributionManagement>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
