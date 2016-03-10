@@ -12,14 +12,29 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    
   </properties>
   
   <scm>
   <connection>scm:git:https://github.com/aksjm2/2016sv.git</connection>
   </scm>
   <build>
-  <plugins>  <plugin>
+  <plugins>
+  <plugin>
+      <!-- Build an executable JAR -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>2.4</version>
+      <configuration>
+        <archive>
+          <manifest>
+            <addClasspath>true</addClasspath>
+            <classpathPrefix>classes/</classpathPrefix>
+            <mainClass>src.test.App</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+  <plugin>
     	<artifactId>maven-release-plugin</artifactId>
     	<configuration>
        		<releaseProfiles>release</releaseProfiles>
