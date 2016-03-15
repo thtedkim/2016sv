@@ -46,7 +46,7 @@
 	</plugins>
 
   </build>
-
+<!-- 
 <distributionManagement>
     <repository>
       <id>src.test</id>
@@ -54,7 +54,7 @@
       <url>http://localhost/</url>
     </repository>
  </distributionManagement>
-  
+  -->
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
