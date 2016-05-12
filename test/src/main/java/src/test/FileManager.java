@@ -10,29 +10,53 @@ import java.util.ArrayList;
 public class FileManager{
     ArrayList<String> FileList;
 
-
-
     public ArrayList<String> OpenFiles(ArrayList<String> FileList){
-        int returnVal = MainSystem.fc.showOpenDialog(MainSystem.frame);
+
+        this.FileList = FileList;
+        MainSystem.fc.setMultiSelectionEnabled(true);
+
+        int returnVal = MainSystem.fc.showOpenDialog(MainSystem.mainFrame);
+
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = MainSystem.fc.getSelectedFile();
-            //This is where a real application would open the file.
-            //System.out.println("Opening: " + file.getName() + "."+file.getAbsolutePath() );
-            this.FileList = FileList;
-            this.FileList.add(file.getAbsolutePath());
+
+
+            File[] files = MainSystem.fc.getSelectedFiles();
+            for(File file : files){
+                this.FileList.add(file.getAbsolutePath());
+            }
+
+
         } else {
             System.out.println("Open command cancelled by user.");
         }
-
-
-
         return this.FileList;
     }
 
-    public void DisplayFileList(ArrayList<String> FileList){
+    public int[] SelectFiles(ArrayList<String> FileList){
+        this.FileList = FileList;
+        int[] selectedidx = MainSystem.fileListVew.getSelectedIndices();
 
+        return selectedidx;
+    }
+
+    public void DeleteFiles(ArrayList<String> FileList){
+        int[] selectedidx = SelectFiles(FileList);
+        int weight = 0;
+        for(int i : selectedidx){
+            int tmp = i - weight;
+            this.FileList.remove(tmp);
+            weight++;
+        }
+        DisplayFileList(this.FileList);
+    }
+
+    public void DisplayFileList(ArrayList<String> FileList){
         String[] strings = FileList.toArray(new String[]{""});
-        MainSystem.jlist = new JList(strings);
+        MainSystem.fileListVew.setListData(strings);
+    }
+
+    public void Clear(){
+        this.FileList.clear();
     }
 }
