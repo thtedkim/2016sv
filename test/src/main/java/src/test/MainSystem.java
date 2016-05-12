@@ -1,35 +1,44 @@
 package src.test;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
-/**
- * Hello world!
- *
- */
-public class App 
+public class MainSystem
 {
+    FileManager fileManager = new FileManager();
+    ResultManager resultManager = new ResultManager();
+    ViewManager viewManager = new ViewManager();
 
-    JFrame frame = new JFrame("Graphical Clone Checker");
-    JDialog configureDialog = new JDialog(frame, "JDialog 타이틀");
-    JButton configureApplyBtnDialog = new JButton("apply");
-    JButton configureCancelBtnDialog = new JButton("cancel");
+    //Container
+    static JFrame frame = new JFrame("Graphical Clone Checker-Main");
+    JFrame frame1 = new JFrame("Graphical Clone Checker-Result");
+    JDialog configureDialog = new JDialog(frame, "Graphical Clone Checker-Configure");
+
+    //Component-Main
     JButton openButton = new JButton("Open");
     JButton deleteButton = new JButton("Delete");
     JButton clearButton = new JButton("Clear");
     JButton compareButton = new JButton("Compare");
     JButton configureButton = new JButton("Configure");
     JButton exitButton = new JButton("Exit");
-    JList fileList;
-    JFileChooser fc;
+
+    //Variable-Main
+    static JList jlist;
+    static JFileChooser fc;
+    ArrayList<String> FileList = new ArrayList<String>();
+
+    //Component-Configure
+    JButton configureApplyBtnDialog = new JButton("apply");
+    JButton configureCancelBtnDialog = new JButton("cancel");
 
 
-    public void createFrame()
+
+
+    public void createMainFrame()
     {
         JPanel upPanel = new JPanel();
         JPanel downPanel = new JPanel();
@@ -37,33 +46,12 @@ public class App
 
         fc = new JFileChooser();
 
-        ArrayList<String> fileListarray = new ArrayList<String>();
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
-        fileListarray.add("/home/a.c");
+
 
         openButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int returnVal = fc.showOpenDialog(frame);
-
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
-                    //This is where a real application would open the file.
-                    System.out.println("Opening: " + file.getName() + "."+file.getAbsolutePath() );
-                } else {
-                    System.out.println("Open command cancelled by user.");
-                }
+                FileList = fileManager.OpenFiles(FileList);
 
             }
         });
@@ -75,10 +63,15 @@ public class App
             }
         });
 
-        String[] strings = fileListarray.toArray(new String[]{""});
-        fileList = new JList(strings);
+        compareButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createResultFrame();
+            }
+        });
 
-        JScrollPane scrollPane = new JScrollPane(fileList);
+
+        JScrollPane scrollPane = new JScrollPane(jlist);
 
         sideButtonPanel.setLayout(new BoxLayout(sideButtonPanel, BoxLayout.PAGE_AXIS));
         sideButtonPanel.add(compareButton);
@@ -110,7 +103,12 @@ public class App
 
         //swing에만 있는 X버튼 클릭시 종료
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 
+    public void createResultFrame(){
+        frame1.setSize(400,300);
+        frame1.setVisible(true);
+        frame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     }
 
@@ -126,8 +124,8 @@ public class App
 
     public static void main( String[] args )
     {
-        App frameExam = new App();
-        frameExam.createFrame();
+        MainSystem frameExam = new MainSystem();
+        frameExam.createMainFrame();
 
     }
 
