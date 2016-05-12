@@ -5,6 +5,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +26,8 @@ public class App
     JButton configureButton = new JButton("Configure");
     JButton exitButton = new JButton("Exit");
     JList fileList;
+    JFileChooser fc;
+
 
     public void createFrame()
     {
@@ -32,7 +35,7 @@ public class App
         JPanel downPanel = new JPanel();
         JPanel sideButtonPanel = new JPanel();
 
-
+        fc = new JFileChooser();
 
         ArrayList<String> fileListarray = new ArrayList<String>();
         fileListarray.add("/home/a.c");
@@ -52,6 +55,15 @@ public class App
         openButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int returnVal = fc.showOpenDialog(frame);
+
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File file = fc.getSelectedFile();
+                    //This is where a real application would open the file.
+                    System.out.println("Opening: " + file.getName() + "."+file.getAbsolutePath() );
+                } else {
+                    System.out.println("Open command cancelled by user.");
+                }
 
             }
         });
