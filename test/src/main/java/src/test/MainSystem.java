@@ -32,8 +32,8 @@ public class MainSystem
     ArrayList<String> FileList = new ArrayList<String>();
 
     //Component-Configure
-    JButton configureApplyBtnDialog = new JButton("apply");
-    JButton configureCancelBtnDialog = new JButton("cancel");
+    JButton configureApplyBtnDialog = new JButton("Ok");
+    JButton configureCancelBtnDialog = new JButton("Cancel");
 
     public void createMainFrame()
     {
@@ -44,43 +44,36 @@ public class MainSystem
         fc = new JFileChooser();
 
         openButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 ClickOpenBtn();
             }
         });
         deleteButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 ClickDeleteBtn();
             }
         });
         clearButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 ClickClearBtn();
             }
         });
         displayresultButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 ClickDisplayResultBtn();
             }
         });
         compareButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 ClickCompareBtn();
             }
         });
         configureButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 showConfigureDialog();
             }
         });
         exitButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 ClickExitBtn();
             }
